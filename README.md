@@ -1,5 +1,5 @@
 Guia de Estudos Interativo - PPMG 2025
-
+https://fabiomendes33.github.io/TEORIA_PPMG2025/
 
 🎯 Sobre o Projeto
 Este é um portal de estudos centralizado, criado para organizar e facilitar o acesso aos materiais para o concurso da Polícia Penal de Minas Gerais (PPMG) 2025. A interface web interativa permite navegar entre as diferentes disciplinas e acessar os PDFs de teoria de forma rápida e intuitiva.
