@@ -15,338 +15,483 @@
       body {
         font-family: "Inter", sans-serif;
       }
+
       .key-term {
-        color: #2563eb; /* Blue-600 */
+        color: #2563eb;
+        /* blue-600 */
         font-weight: 600;
       }
-      .material-type {
-        color: #16a34a; /* Green-600 */
-        font-weight: 600;
-      }
+
       .property {
-        color: #c026d3; /* Fuchsia-600 */
+        color: #c026d3;
+        /* fuchsia-600 */
         font-weight: 600;
       }
-      .process {
-        color: #ea580c; /* Orange-600 */
-        font-weight: 600;
-      }
-      .topic-btn.active {
-        transform: scale(1.05);
-        box-shadow: 0 0 0 3px white, 0 0 0 5px var(--tw-shadow-color);
-      }
-      #theory-content h3 {
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: #1e293b; /* slate-800 */
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-        border-bottom: 2px solid #e2e8f0; /* slate-200 */
-        padding-bottom: 0.5rem;
-      }
-      #theory-content p {
-        line-height: 1.75;
-        margin-bottom: 1rem;
-      }
-      #theory-content ul {
-        list-style-position: inside;
-        margin-bottom: 1rem;
-        padding-left: 0.5rem;
+
+      #app-container {
+        display: none;
       }
     </style>
   </head>
+
   <body
     class="bg-slate-100 text-slate-800 flex items-center justify-center min-h-screen p-4"
   >
-    <div id="app-container" class="w-full max-w-4xl mx-auto">
-      <!-- Tela de Login (Simulada) -->
-      <div
-        id="login-screen"
-        class="bg-white p-8 rounded-2xl shadow-lg text-center"
-      >
-        <h1 class="text-3xl font-bold text-slate-900 mb-2">
-          SISTEMA DE ESTUDO POLICIA PENAL MG 2025
+    <!-- Tela de Login (Simulada) -->
+    <div id="login-screen" class="w-full max-w-md">
+      <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+        <h1 class="text-3xl font-bold text-slate-800 mb-2">
+          SISTEMA DE ESTUDO PPMG 2025
         </h1>
-        <p class="text-slate-600 mb-6">
-          Selecione uma matéria para ver a teoria. Insira seu nome para começar.
-        </p>
-        <div class="space-y-4">
-          <input
-            type="text"
-            id="username"
-            placeholder="Digite seu nome"
-            class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-          />
-          <button
-            id="start-study-btn"
-            class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105 shadow-md"
-          >
-            Iniciar Estudos
-          </button>
-        </div>
-        <p class="text-xs text-slate-400 mt-6">
+        <p class="text-slate-500 mb-6">Insira seu nome para começar.</p>
+        <input
+          type="text"
+          id="name-input"
+          placeholder="Digite seu nome"
+          class="w-full px-4 py-3 border border-slate-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button
+          id="start-button"
+          class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+        >
+          Iniciar Estudos
+        </button>
+        <p class="text-xs text-slate-400 mt-4">
           Obs: Este é um login simulado para personalizar sua experiência.
         </p>
       </div>
+    </div>
 
-      <!-- Tela de Estudos -->
-      <div id="study-screen" class="hidden bg-white p-8 rounded-2xl shadow-lg">
-        <div class="flex justify-between items-start border-b pb-4 mb-6">
+    <!-- Conteúdo Principal do Guia -->
+    <div id="app-container" class="w-full max-w-4xl mx-auto">
+      <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
+        <div class="flex justify-between items-center mb-6">
           <div>
-            <h2 class="text-2xl font-bold text-slate-900">Tópicos de Estudo</h2>
-            <p id="welcome-message" class="text-slate-600"></p>
+            <h1 class="text-2xl sm:text-3xl font-bold text-slate-800">
+              Tópicos de Estudo
+            </h1>
+            <p class="text-slate-500" id="welcome-message">Bons estudos!</p>
           </div>
           <button
-            id="back-btn"
-            class="bg-slate-200 text-slate-700 font-semibold py-2 px-4 rounded-lg hover:bg-slate-300 transition"
+            id="back-button"
+            class="hidden bg-slate-200 text-slate-600 font-bold py-2 px-4 rounded-lg hover:bg-slate-300 transition"
           >
             Voltar
           </button>
         </div>
 
-        <div id="topics-nav" class="flex flex-wrap gap-3 mb-6 justify-center">
-          <!-- Botões dos Tópicos serão inseridos aqui -->
+        <!-- Menu de Matérias -->
+        <div
+          id="subjects-menu"
+          class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3"
+        >
+          <!-- Botões serão gerados aqui pelo JavaScript -->
         </div>
 
-        <div
-          id="theory-content"
-          class="bg-slate-50 p-6 rounded-lg border h-96 overflow-y-auto"
-        >
-          <!-- Conteúdo da Teoria será inserido aqui -->
-          <div
-            class="text-center text-slate-500 flex flex-col items-center justify-center h-full"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="48"
-              height="48"
-              fill="currentColor"
-              class="bi bi-book mb-3"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.823c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"
-              />
-            </svg>
-            <p>Selecione um tópico acima para começar a estudar.</p>
-          </div>
+        <!-- Área de Teoria -->
+        <div id="theory-content" class="hidden mt-6">
+          <!-- Conteúdo da teoria será inserido aqui -->
         </div>
       </div>
     </div>
 
     <script>
-      // --- Elementos do DOM ---
       const loginScreen = document.getElementById("login-screen");
-      const studyScreen = document.getElementById("study-screen");
-
-      const usernameInput = document.getElementById("username");
-      const startStudyBtn = document.getElementById("start-study-btn");
-      const backBtn = document.getElementById("back-btn");
-
+      const appContainer = document.getElementById("app-container");
+      const startButton = document.getElementById("start-button");
+      const nameInput = document.getElementById("name-input");
       const welcomeMessage = document.getElementById("welcome-message");
-      const topicsNav = document.getElementById("topics-nav");
+      const subjectsMenu = document.getElementById("subjects-menu");
       const theoryContent = document.getElementById("theory-content");
+      const backButton = document.getElementById("back-button");
 
-      // --- Dados da Teoria ---
       const theoryData = {
         portugues: {
           title: "Português",
           color: "bg-blue-500",
           content: `
-            <h3>Língua Portuguesa</h3>
-            <p>Abrange o estudo da <span class='key-term'>gramática normativa</span>, <span class='key-term'>interpretação de textos</span>, concordância verbal e nominal, regência e crase. Acentuação e ortografia são <span class='property'>fundamentais</span> para uma boa base.</p>
-            <div class="mt-4 space-y-2">
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/portugues.pdf" target="_blank" class="inline-block bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition">Abrir PDF (Tópico 1)</a>
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/portugues1.pdf" target="_blank" class="inline-block bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition">Abrir PDF (Tópico 2)</a>
-            </div>
-        `,
+                    <h3>Língua Portuguesa</h3>
+                    <p>Matéria fundamental que avalia a capacidade de interpretação e o domínio da norma culta.</p>
+                    
+                    <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Interpretação e Compreensão de Textos.</li>
+                                    <li>Crase.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                    <li>Concordância Verbal e Nominal.</li>
+                                    <li>Regência Verbal e Nominal.</li>
+                                    <li>Pontuação.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 space-y-2">
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/portugues.pdf" target="_blank" class="inline-block bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition">Abrir PDF (Tópico 1)</a>
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/portugues1.pdf" target="_blank" class="inline-block bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition">Abrir PDF (Tópico 2)</a>
+                    </div>
+                `,
         },
         raciocinio_logico: {
           title: "Raciocínio Lógico",
           color: "bg-indigo-500",
           content: `
-            <h3>Raciocínio Lógico-Matemático</h3>
-            <p>Envolve a compreensão de <span class='key-term'>estruturas lógicas</span>, lógica de argumentação, diagramas lógicos e sequências. Problemas com <span class='property'>tabelas-verdade</span> e proposições são muito comuns em concursos.</p>
-            <div class="mt-4 space-y-2">
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/raciocinio_logico.pdf" target="_blank" class="inline-block bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 transition">Abrir PDF da Matéria</a>
-            </div>
-        `,
+                    <h3>Raciocínio Lógico-Matemático</h3>
+                    <p>Avalia a capacidade de resolver problemas com base em estruturas lógicas e argumentação.</p>
+
+                     <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Proposições Lógicas e Conectivos.</li>
+                                    <li>Tabela-Verdade.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                    <li>Equivalências e Negações Lógicas.</li>
+                                    <li>Argumentação Lógica.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 space-y-2">
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/raciocinio_logico.pdf" target="_blank" class="inline-block bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 transition">Abrir PDF da Matéria</a>
+                    </div>
+                `,
         },
         direito_penal: {
           title: "Direito Penal",
           color: "bg-red-500",
           content: `
-            <h3>Direito Penal</h3>
-            <p>Estudo dos <span class='key-term'>crimes e das penas</span>. Analisa o <span class='property'>Código Penal</span>, abrangendo a Teoria do Crime, tipicidade, dolo e culpa.</p>
-            <div class="mt-4 space-y-2">
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_penal.pdf" target="_blank" class="inline-block bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition">Abrir PDF (Parte 1)</a>
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_penal1.pdf" target="_blank" class="inline-block bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition">Abrir PDF (Parte 2)</a>
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_penal2.pdf" target="_blank" class="inline-block bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition">Abrir PDF (Parte 3)</a>
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_penal3.pdf" target="_blank" class="inline-block bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition">Abrir PDF (Parte 4)</a>
-            </div>
-        `,
+                    <h3>Direito Penal</h3>
+                    <p>Estudo dos crimes e das penas, com base no Código Penal e em leis específicas.</p>
+
+                     <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Crimes contra a Administração Pública.</li>
+                                    <li>Teoria do Crime (Fato Típico, Ilicitude, Culpabilidade).</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                    <li>Crimes contra a Pessoa (Homicídio, Lesão Corporal).</li>
+                                    <li>Crimes contra o Patrimônio (Roubo, Furto).</li>
+                                    <li>Excludentes de Ilicitude e Culpabilidade.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 space-y-2">
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_penal.pdf" target="_blank" class="inline-block bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition">Abrir PDF (Parte 1)</a>
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_penal1.pdf" target="_blank" class="inline-block bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition">Abrir PDF (Parte 2)</a>
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_penal2.pdf" target="_blank" class="inline-block bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition">Abrir PDF (Parte 3)</a>
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_penal3.pdf" target="_blank" class="inline-block bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 transition">Abrir PDF (Parte 4)</a>
+                    </div>
+                `,
         },
         direito_humano: {
           title: "Direitos Humanos",
           color: "bg-teal-500",
           content: `
-            <h3>Direitos Humanos</h3>
-            <p>Estuda os direitos básicos e fundamentais de todos os seres humanos, com foco na <span class='key-term'>Declaração Universal dos Direitos Humanos (DUDH)</span>.</p>
-            <div class="mt-4 space-y-2">
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_humano.pdf" target="_blank" class="inline-block bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition">Abrir PDF da Matéria</a>
-            </div>
-        `,
+                    <h3>Direitos Humanos</h3>
+                    <p>Estuda os direitos básicos e fundamentais de todos os seres humanos.</p>
+                     <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Declaração Universal dos Direitos Humanos (DUDH): Artigos e características.</li>
+                                    <li>Art. 5º da Constituição Federal (relação com Direitos Humanos).</li>
+                                </ul>
+                            </div>
+                             <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                     <li>Teoria Geral dos Direitos Humanos (características, gerações/dimensões).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/direito_humano.pdf" target="_blank" class="inline-block bg-teal-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-teal-700 transition">Abrir PDF da Matéria</a>
+                    </div>
+                `,
         },
         processual_penal: {
           title: "Processual Penal",
           color: "bg-rose-500",
           content: `
-            <h3>Direito Processual Penal</h3>
-            <p>Regulamenta a aplicação do Direito Penal. Aborda temas como <span class='key-term'>inquérito policial</span>, ação penal, competência e <span class='property'>provas</span>.</p>
-            <div class="mt-4 space-y-2">
-                <a href="#" class="inline-block bg-gray-400 text-white font-bold py-2 px-4 rounded-lg cursor-not-allowed">PDF não disponível</a>
-            </div>
-        `,
+                    <h3>Direito Processual Penal</h3>
+                    <p>Regulamenta a aplicação do Direito Penal, definindo os ritos e procedimentos.</p>
+                    <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Inquérito Policial.</li>
+                                    <li>Prisão em Flagrante, Preventiva e Temporária.</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                    <li>Ação Penal (Pública e Privada).</li>
+                                    <li>Provas no Processo Penal.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="#" class="inline-block bg-gray-400 text-white font-bold py-2 px-4 rounded-lg cursor-not-allowed">PDF não disponível</a>
+                    </div>
+                `,
         },
         constitucional: {
           title: "Constitucional",
           color: "bg-green-500",
           content: `
-            <h3>Direito Constitucional</h3>
-            <p>Focado na <span class='key-term'>Constituição Federal</span>, especialmente em <span class='property'>Direitos e Garantias Fundamentais</span> e Organização do Estado.</p>
-            <div class="mt-4 space-y-2">
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/constitucional.pdf" target="_blank" class="inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">Abrir PDF da Matéria</a>
-            </div>
-        `,
+                    <h3>Direito Constitucional</h3>
+                    <p>Focado na Constituição Federal, a lei máxima do país.</p>
+                     <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Artigo 5º - Direitos e Deveres Individuais e Coletivos.</li>
+                                    <li>Organização do Estado (União, Estados, Municípios).</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                    <li>Poder Executivo e Poder Judiciário.</li>
+                                    <li>Segurança Pública (Art. 144).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/constitucional.pdf" target="_blank" class="inline-block bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition">Abrir PDF da Matéria</a>
+                    </div>
+                `,
         },
         administrativo: {
           title: "Administrativo",
           color: "bg-emerald-500",
           content: `
-            <h3>Direito Administrativo</h3>
-            <p>Estuda os <span class='key-term'>princípios da Administração Pública</span> (LIMPE), atos administrativos e licitações (<span class='property'>Lei 14.133/21</span>).</p>
-            <div class="mt-4 space-y-2">
-                <a href="#" class="inline-block bg-gray-400 text-white font-bold py-2 px-4 rounded-lg cursor-not-allowed">PDF não disponível</a>
-            </div>
-        `,
+                    <h3>Direito Administrativo</h3>
+                    <p>Estuda os princípios e regras que regem a Administração Pública.</p>
+                    <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Princípios da Administração Pública (LIMPE).</li>
+                                    <li>Atos Administrativos (elementos, atributos, anulação, revogação).</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                    <li>Poderes Administrativos (Vinculado, Discricionário, Hierárquico, Disciplinar, de Polícia).</li>
+                                    <li>Agentes Públicos.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="#" class="inline-block bg-gray-400 text-white font-bold py-2 px-4 rounded-lg cursor-not-allowed">PDF não disponível</a>
+                    </div>
+                `,
         },
         legislacao_especial: {
           title: "Legislação Especial",
           color: "bg-amber-500",
           content: `
-            <h3>Legislação Especial</h3>
-            <p>Conjunto de leis extravagantes como a Lei de Drogas, Lei Maria da Penha e o <span class='key-term'>Estatuto do Desarmamento</span>.</p>
-            <div class="mt-4 space-y-2">
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/legislacao_especial.pdf" target="_blank" class="inline-block bg-amber-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-amber-700 transition">Abrir PDF da Matéria</a>
-            </div>
-        `,
+                    <h3>Legislação Especial</h3>
+                    <p>Conjunto de leis importantes que não estão nos grandes códigos.</p>
+                     <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Lei de Abuso de Autoridade (Lei nº 13.869/2019).</li>
+                                    <li>Lei de Execução Penal (LEP - Lei nº 7.210/1984).</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                    <li>Estatuto do Desarmamento (Lei nº 10.826/2003).</li>
+                                    <li>Lei de Drogas (Lei nº 11.343/2006).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/legislacao_especial.pdf" target="_blank" class="inline-block bg-amber-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-amber-700 transition">Abrir PDF da Matéria</a>
+                    </div>
+                `,
         },
         informatica: {
           title: "Informática",
           color: "bg-slate-500",
           content: `
-            <h3>Noções de Informática</h3>
-            <p>Cobre conceitos de hardware e software, <span class='key-term'>sistemas operacionais</span>, editores de texto e planilhas, <span class='property'>redes de computadores</span> e segurança da informação.</p>
-            <div class="mt-4 space-y-2">
-                <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/informatica.pdf" target="_blank" class="inline-block bg-slate-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-700 transition">Abrir PDF da Matéria</a>
-            </div>
-        `,
+                    <h3>Noções de Informática</h3>
+                    <p>Conceitos essenciais para o uso de ferramentas digitais no dia a dia.</p>
+                     <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Segurança da Informação (Vírus, Malware, Phishing, Backup).</li>
+                                </ul>
+                            </div>
+                            <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                    <li>Redes de Computadores e Internet (Navegadores, URL, E-mail).</li>
+                                    <li>Editores de Planilhas (Excel/Calc): Fórmulas básicas.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="https://media.githubusercontent.com/media/fabiomendes33/TEORIA_PPMG2025/main/informatica.pdf" target="_blank" class="inline-block bg-slate-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-slate-700 transition">Abrir PDF da Matéria</a>
+                    </div>
+                `,
         },
         estatistica: {
           title: "Estatística",
           color: "bg-cyan-500",
           content: `
-            <h3>Estatística</h3>
-            <p>Aborda conceitos de estatística <span class='key-term'>descritiva</span> (média, moda, mediana) e <span class='key-term'>inferencial</span> (amostragem, estimação).</p>
-            <div class="mt-4 space-y-2">
-                <a href="#" class="inline-block bg-gray-400 text-white font-bold py-2 px-4 rounded-lg cursor-not-allowed">PDF não disponível</a>
-            </div>
-        `,
+                    <h3>Estatística</h3>
+                    <p>Análise e interpretação de dados, uma habilidade cada vez mais cobrada.</p>
+                     <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                             <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                     <li>Leitura e Interpretação de Gráficos e Tabelas.</li>
+                                     <li>Média, Moda e Mediana.</li>
+                                </ul>
+                            </div>
+                             <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                     <li>Porcentagem e Probabilidade Básica.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="#" class="inline-block bg-gray-400 text-white font-bold py-2 px-4 rounded-lg cursor-not-allowed">PDF não disponível</a>
+                    </div>
+                `,
         },
         redacao: {
           title: "Redação",
           color: "bg-violet-500",
           content: `
-            <h3>Redação</h3>
-            <p>Focada na produção de textos dissertativo-argumentativos, avaliando <span class='property'>coesão</span> e <span class='property'>coerência</span>.</p>
-            <div class="mt-4 space-y-2">
-                <a href="#" class="inline-block bg-gray-400 text-white font-bold py-2 px-4 rounded-lg cursor-not-allowed">PDF não disponível</a>
-            </div>
-        `,
+                    <h3>Redação</h3>
+                    <p>Produção de textos dissertativo-argumentativos, decisiva para a classificação.</p>
+                     <div class="mt-6 p-4 bg-white border-l-4 border-gray-400 rounded-r-lg shadow-sm">
+                        <h4 class="font-bold text-lg text-slate-700 mb-3">🧠 Guia de Foco</h4>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded-r-md">
+                                <h5 class="font-bold text-red-800">🔥 Altíssima Prioridade</h5>
+                                <ul class="list-disc list-inside text-red-700 mt-1 text-sm">
+                                    <li>Estrutura do Texto (Introdução, Desenvolvimento, Conclusão).</li>
+                                    <li>Coesão e Coerência.</li>
+                                </ul>
+                            </div>
+                             <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-md">
+                                <h5 class="font-bold text-yellow-800">⭐ Alta Prioridade</h5>
+                                <ul class="list-disc list-inside text-yellow-700 mt-1 text-sm">
+                                    <li>Argumentação e Repertório Sociocultural.</li>
+                                    <li>Domínio da Norma Culta (ortografia, pontuação, gramática).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 space-y-2">
+                        <a href="#" class="inline-block bg-gray-400 text-white font-bold py-2 px-4 rounded-lg cursor-not-allowed">PDF não disponível</a>
+                    </div>
+                `,
         },
       };
-      // --- Estado do App ---
-      let username = "Aluno(a)";
 
-      // --- Funções ---
-      function startStudy() {
-        const name = usernameInput.value.trim();
-        if (name) {
-          username = name;
-        }
-        welcomeMessage.textContent = `Bons estudos, ${username}!`;
-        loginScreen.classList.add("hidden");
-        studyScreen.classList.remove("hidden");
-        populateTopics();
-      }
-
-      function populateTopics() {
-        topicsNav.innerHTML = "";
+      // Função para gerar os botões das matérias
+      function generateSubjectButtons() {
+        subjectsMenu.innerHTML = ""; // Limpa o menu
         for (const key in theoryData) {
-          const topic = theoryData[key];
+          const subject = theoryData[key];
           const button = document.createElement("button");
-          button.textContent = topic.title;
-          button.className = `topic-btn text-white font-bold py-2 px-5 rounded-lg transition-transform transform hover:scale-105 shadow-lg ${topic.color}`;
-          button.style.setProperty(
-            "--tw-shadow-color",
-            `var(--tw-color-${topic.color.split("-")[1]}-${
-              topic.color.split("-")[2]
-            })`
-          );
-          button.addEventListener("click", () => displayTheory(key));
-          topicsNav.appendChild(button);
+          button.textContent = subject.title;
+          button.className = `text-white font-bold py-3 px-2 rounded-lg text-sm shadow-md hover:opacity-90 transition ${subject.color}`;
+          button.onclick = () => showTheory(key);
+          subjectsMenu.appendChild(button);
         }
       }
 
-      function displayTheory(topicKey) {
-        theoryContent.innerHTML = theoryData[topicKey].content;
-
-        // Gerencia o estado ativo dos botões
-        const allButtons = topicsNav.querySelectorAll(".topic-btn");
-        allButtons.forEach((btn, index) => {
-          const currentKey = Object.keys(theoryData)[index];
-          if (currentKey === topicKey) {
-            btn.classList.add("active");
-            btn.style.boxShadow = `0 0 0 3px white, 0 0 0 5px ${theoryData[
-              topicKey
-            ].color.replace("bg-", "var(--tw-color-")})`;
-          } else {
-            btn.classList.remove("active");
-            btn.style.boxShadow = "";
-          }
-        });
+      // Função para mostrar a teoria
+      function showTheory(subjectKey) {
+        const subject = theoryData[subjectKey];
+        subjectsMenu.classList.add("hidden");
+        theoryContent.innerHTML = subject.content;
+        theoryContent.classList.remove("hidden");
+        backButton.classList.remove("hidden");
       }
 
-      function goBackToLogin() {
-        studyScreen.classList.add("hidden");
-        loginScreen.classList.remove("hidden");
-        usernameInput.value = "";
-        theoryContent.innerHTML = `<div class="text-center text-slate-500 flex flex-col items-center justify-center h-full">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-book mb-3" viewBox="0 0 16 16">
-                  <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.823c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
-                </svg>
-                <p>Selecione um tópico acima para começar a estudar.</p>
-            </div>`;
+      // Função para voltar ao menu
+      function showMenu() {
+        subjectsMenu.classList.remove("hidden");
+        theoryContent.classList.add("hidden");
+        backButton.classList.add("hidden");
       }
 
-      // --- Event Listeners ---
-      startStudyBtn.addEventListener("click", startStudy);
-      usernameInput.addEventListener("keyup", (event) => {
-        if (event.key === "Enter") {
-          startStudy();
+      // Event Listeners
+      startButton.addEventListener("click", () => {
+        const name = nameInput.value.trim();
+        if (name) {
+          welcomeMessage.textContent = `Bons estudos, ${name}!`;
+          loginScreen.style.display = "none";
+          appContainer.style.display = "block";
+        } else {
+          alert("Por favor, insira seu nome.");
         }
       });
-      backBtn.addEventListener("click", goBackToLogin);
+
+      backButton.addEventListener("click", showMenu);
+
+      // Inicialização
+      generateSubjectButtons();
     </script>
   </body>
 </html>
